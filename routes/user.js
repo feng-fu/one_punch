@@ -10,14 +10,13 @@ router.route('/')
     res.json(user_list)
   })
   .post((req, res, next) => {
-    console.log('post data...')
     const user_list = addUser(req)
     res.json(user_list)
   })
 
 router.route('/:id')
   .get((req, res, next) => {
-    const user_info = getSingleUser(req.param.id)
+    const user_info = getSingleUser(req.params.id)
     res.json(user_info)
   })
   .patch((req, res, next) => {
@@ -25,7 +24,7 @@ router.route('/:id')
     res.json(user_info)
   })
   .delete((req, res, next) => {
-    const delete_result = removeSingleUser(req.body.id)
+    const delete_result = removeSingleUser(req.params.id)
     res.json(delete_result)
   })
 
