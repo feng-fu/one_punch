@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getUsers, getSingleUser, modifiedUser, addUser, removeSingleUser  } = require('./../models/user')
+const { getUsers, getSingleUser, modifiedUser, addUser, removeSingleUser  } = require('./../models/memo/user')
 
 
 /* GET user listing. */

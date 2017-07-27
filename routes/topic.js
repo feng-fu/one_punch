@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getTopics, getSingleTopic, modifiedTopic, addTopic, removeSingleTopic, addReply  } = require('./../models/topic')
+const { getTopics, getSingleTopic, modifiedTopic, addTopic, removeSingleTopic, addReply  } = require('./../models/memo/topic')
 
 
 /* GET user listing. */
