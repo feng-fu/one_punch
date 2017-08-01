@@ -1,30 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const { getUsers, getSingleUser, modifiedUser, addUser, removeSingleUser  } = require('./../models/memo/user')
+// const { getUsers, getSingleUser, modifiedUser, addUser, removeSingleUser  } = require('./../models/memo/user')
 
+const { addUser,getUsers, findSpecialUser, modifiedUser, removeSingleUser } = require('./../models/mongo/user')
 
 /* GET user listing. */
 router.route('/')
-  .get((req, res, next) => {
-    const user_list = getUsers()
+  .get(async (req, res, next) => {
+    const user_list = await getUsers()
     res.json(user_list)
   })
-  .post((req, res, next) => {
-    const user_list = addUser(req)
+  .post(async (req, res, next) => {
+    const user_list = await addUser(req)
     res.json(user_list)
   })
 
 router.route('/:id')
-  .get((req, res, next) => {
-    const user_info = getSingleUser(req.params.id)
+  .get(async (req, res, next) => {
+    const user_info = await findSpecialUser(req.params.id)
     res.json(user_info)
   })
-  .patch((req, res, next) => {
-    const user_info = modifiedUser(req)
+  .patch(async (req, res, next) => {
+    const user_info = await modifiedUser(req)
     res.json(user_info)
   })
-  .delete((req, res, next) => {
-    const delete_result = removeSingleUser(req.params.id)
+  .delete(async (req, res, next) => {
+    const delete_result = await removeSingleUser(req.params.id)
     res.json(delete_result)
   })
 

@@ -1,36 +1,37 @@
 const express = require('express');
 const router = express.Router();
-const { getTopics, getSingleTopic, modifiedTopic, addTopic, removeSingleTopic, addReply  } = require('./../models/memo/topic')
+// const { getTopics, getSingleTopic, modifiedTopic, addTopic, removeSingleTopic, addReply  } = require('./../models/memo/topic')
+const { getTopics, getSingleTopic, modifiedTopic, addTopic, removeSingleTopic, addReply  } = require('./../models/mongo/topic')
 
 
 /* GET user listing. */
 router.route('/')
-  .get((req, res, next) => {
-    const topic_list = getTopics()
+  .get(async (req, res, next) => {
+    const topic_list = await getTopics()
     res.json(topic_list)
   })
-  .post((req, res, next) => {
-    const topic_list = addTopic(req)
+  .post(async (req, res, next) => {
+    const topic_list = await addTopic(req)
     res.json(topic_list)
   })
 
 router.route('/:id')
-  .get((req, res, next) => {
-    const topic_info = getSingleTopic(req.params.id)
+  .get(async (req, res, next) => {
+    const topic_info = await getSingleTopic(req.params.id)
     res.json(topic_info)
   })
-  .patch((req, res, next) => {
-    const topic_info = modifiedTopic(req)
+  .patch(async (req, res, next) => {
+    const topic_info = await modifiedTopic(req)
     res.json(topic_info)
   })
-  .delete((req, res, next) => {
-    const delete_result = removeSingleTopic(req.params.id)
+  .delete(async (req, res, next) => {
+    const delete_result = await removeSingleTopic(req.params.id)
     res.json(delete_result)
   })
 
 router.route('/:id/reply')
-  .post((req, res, next) => {
-    const result = addReply(req)
+  .post(async (req, res, next) => {
+    const result = await addReply(req)
     res.json(result)
   })
 
