@@ -6,27 +6,55 @@ const { addUser,getUsers, findSpecialUser, modifiedUser, removeSingleUser } = re
 
 /* GET user listing. */
 router.route('/')
-  .get(async (req, res, next) => {
-    const user_list = await getUsers()
-    res.json(user_list)
+  .get((req, res, next) => {
+
+    (async () => {
+      await getUsers().then(r => {
+        res.json(r)
+      }).catch(e => {
+        throw new Error(e.message)
+        next(e.message)
+      })
+    })()
   })
-  .post(async (req, res, next) => {
-    const user_list = await addUser(req)
-    res.json(user_list)
+  .post((req, res, next) => {
+    (async () => {
+      await addUser(req).then(r => {
+        res.json(r)
+      }).catch(e => {
+        // throw new Error('add error')
+        next(e)
+      })
+    })()
   })
 
 router.route('/:id')
-  .get(async (req, res, next) => {
-    const user_info = await findSpecialUser(req.params.id)
-    res.json(user_info)
+  .get((req, res, next) => {
+    (async () => {
+      await findSpecialUser(req.params.id).then(r => {
+        res.json(user_info)
+      }).catch(e => {
+        next(e.message)
+      })
+    })()
   })
-  .patch(async (req, res, next) => {
-    const user_info = await modifiedUser(req)
-    res.json(user_info)
+  .patch((req, res, next) => {
+    (async () => {
+      await modifiedUser(req).then(r => {
+        res.json(r)
+      }).catch(e => {
+        next(e.message)
+      })
+    })()
   })
-  .delete(async (req, res, next) => {
-    const delete_result = await removeSingleUser(req.params.id)
-    res.json(delete_result)
+  .delete((req, res, next) => {
+    (async () => {
+      await removeSingleUser(req.params.id).then(r => {
+        res.json(r)
+      }).catch(e => {
+        next(e)
+      })
+    })()
   })
 
 module.exports = router;

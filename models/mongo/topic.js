@@ -16,7 +16,14 @@ async function getTopics() {
 async function modifiedTopic(req) {
   const _id = req.params.id
   const { title, content } = req.body
-  return await TopicModel.findOneAndUpdate({_id: _id}, {title, content}).then().catch(e => {
+  const update = { title, content }
+  
+  for(let i in update) {
+    if(update[i] === undefined) {
+      delete update[i]
+    }
+  }
+  return await TopicModel.findOneAndUpdate({_id: _id}, update, {new: true}).then().catch(e => {
     throw new Error(e)
   })
 }
@@ -53,7 +60,7 @@ async function addReply(req) {
       error: 'not found assign topic.'
     }
   }
-  return await TopicModel.findOneAndUpdate({_id:id}, {$push: {reply: reply} })
+  return await TopicModel.findOneAndUpdate({_id:id}, {$push: {reply: reply} }, {new: true})
 }
 
 module.exports = {

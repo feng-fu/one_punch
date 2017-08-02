@@ -37,7 +37,13 @@ async function getUsers() {
 async function modifiedUser(req) {
   const _id = req.params.id
   const {username, age, gender} = req.body
-  return await UserModel.findOneAndUpdate({_id: _id}, {username, age, gender}).then().catch(e => {
+  const update = {username, age, gender}
+  for(let i in update) {
+    if(update[i] === undefined) {
+      delete update[i]
+    }
+  }
+  return await UserModel.findOneAndUpdate({_id: _id}, update, {new: true}).then().catch(e => {
     throw new Error(e)
   })
 }

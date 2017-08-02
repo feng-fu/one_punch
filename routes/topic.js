@@ -6,33 +6,64 @@ const { getTopics, getSingleTopic, modifiedTopic, addTopic, removeSingleTopic, a
 
 /* GET user listing. */
 router.route('/')
-  .get(async (req, res, next) => {
-    const topic_list = await getTopics()
-    res.json(topic_list)
+  .get((req, res, next) => {
+    (async () => {
+      await getTopics().then(r => {
+        res.json(r)
+      }).catch(e => {
+        next(e.message)
+      })
+    })()
   })
-  .post(async (req, res, next) => {
-    const topic_list = await addTopic(req)
-    res.json(topic_list)
+  .post((req, res, next) => {
+
+    (async () => {
+      await addTopic(req).then(r => {
+        res.json(r)
+      }).catch(e => {
+        next(e.message)
+      })
+    })()
   })
 
 router.route('/:id')
-  .get(async (req, res, next) => {
-    const topic_info = await getSingleTopic(req.params.id)
-    res.json(topic_info)
+  .get((req, res, next) => {
+    (async () => {
+      await getSingleTopic(req.params.id).then(r => {
+        res.json(r)
+      }).catch(e => {
+        next(e.message)
+      })
+    })()
   })
-  .patch(async (req, res, next) => {
-    const topic_info = await modifiedTopic(req)
-    res.json(topic_info)
+  .patch((req, res, next) => {
+    (async () => {
+      await modifiedTopic(req).then(r => {
+        res.json(r)
+      }).catch(e => {
+        next(e.message)
+      })
+    })()
   })
-  .delete(async (req, res, next) => {
-    const delete_result = await removeSingleTopic(req.params.id)
-    res.json(delete_result)
+  .delete((req, res, next) => {
+    (async () => {
+      await removeSingleTopic(req.params.id).then(r => {
+        res.json(r)
+      }).catch(e => {
+        next(e.message)
+      })
+    })()
   })
 
 router.route('/:id/reply')
-  .post(async (req, res, next) => {
-    const result = await addReply(req)
-    res.json(result)
+  .post((req, res, next) => {
+    (async () => {
+      await addReply(req).then(r => {
+        res.json(r)
+      }).catch(e => {
+        next(e.message)
+      })
+    })()
   })
 
 module.exports = router;
