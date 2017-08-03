@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 // const { getUsers, getSingleUser, modifiedUser, addUser, removeSingleUser  } = require('./../models/memo/user')
 
-const { addUser,getUsers, findSpecialUser, modifiedUser, removeSingleUser } = require('./../models/mongo/user')
+// const { addUser,getUsers, findSpecialUser, modifiedUser, removeSingleUser } = require('./../models/mongo/user')
+const { addUser,getUsers, findSpecialUser, modifiedUser, removeSingleUser } = require('./../models/mongo_obj/user')
 
 /* GET user listing. */
 router.route('/')
