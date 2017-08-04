@@ -37,7 +37,7 @@ function addUser(req) {
   }
   const user = {
     username,
-    age, 
+    age,
     gender,
     id: USER_ID++
   }
@@ -49,7 +49,7 @@ function addUser(req) {
 }
 
 function getSingleUser(user_id) {
-  console.log(user_id)
+  // console.log(user_id)
   const user = user_list.find(user => user.id == user_id)
   if(user) {
     return {

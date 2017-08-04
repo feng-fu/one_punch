@@ -50,7 +50,7 @@ function addTopic(req) {
 }
 
 function getSingleTopic(topic_id) {
-  console.log(topic_id)
+//   console.log(topic_id)
   const topic = topic_list.find(topic => topic.id == topic_id)
   if(topic) {
     return {

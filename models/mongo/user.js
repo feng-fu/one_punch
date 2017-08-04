@@ -43,6 +43,7 @@ async function modifiedUser(req) {
       delete update[i]
     }
   }
+  // Object.assign(updata, {username})
   return await UserModel.findOneAndUpdate({_id: _id}, update, {new: true}).then().catch(e => {
     throw new Error(e)
   })

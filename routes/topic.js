@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 // const { getTopics, getSingleTopic, modifiedTopic, addTopic, removeSingleTopic, addReply  } = require('./../models/memo/topic')
 // const { getTopics, getSingleTopic, modifiedTopic, addTopic, removeSingleTopic, addReply  } = require('./../models/mongo/topic')
 
-const Topic  = require('./../models/mongo_obj/topic')
+// const Topic  = require('./../models/mongo_obj/topic')
 
 const { getTopics, getSingleTopic, modifiedTopic, addTopic, removeSingleTopic, addReply  } = require('./../models/mongo_obj/topic')
 
@@ -70,4 +70,4 @@ router.route('/:id/reply')
     })()
   })
 
-module.exports = router;
+module.exports = router

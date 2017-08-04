@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 // const { getUsers, getSingleUser, modifiedUser, addUser, removeSingleUser  } = require('./../models/memo/user')
 
 // const { addUser,getUsers, findSpecialUser, modifiedUser, removeSingleUser } = require('./../models/mongo/user')
@@ -13,7 +13,7 @@ router.route('/')
       await getUsers().then(r => {
         res.json(r)
       }).catch(e => {
-        throw new Error(e.message)
+        // throw new Error(e.message)
         next(e.message)
       })
     })()
@@ -33,7 +33,7 @@ router.route('/:id')
   .get((req, res, next) => {
     (async () => {
       await findSpecialUser(req.params.id).then(r => {
-        res.json(user_info)
+        res.json(r)
       }).catch(e => {
         next(e.message)
       })
@@ -58,4 +58,4 @@ router.route('/:id')
     })()
   })
 
-module.exports = router;
+module.exports = router

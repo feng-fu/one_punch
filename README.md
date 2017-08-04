@@ -1,0 +1,1 @@
+[] NOTE: 使用npm5.30 本地安装eslint init时，can`t find module debug.
