@@ -1,0 +1,1 @@
+module.exports = 'image this secret is a hard thing.'

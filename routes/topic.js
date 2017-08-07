@@ -7,10 +7,12 @@ const router = express.Router()
 
 const { getTopics, getSingleTopic, modifiedTopic, addTopic, removeSingleTopic, addReply  } = require('./../models/mongo_obj/topic')
 
+const permissionVerify = require('../middleware/login_state')
 
 /* GET user listing. */
 router.route('/')
-  .get((req, res, next) => {
+  .get(permissionVerify(), (req, res, next) => {
+    
     (async () => {
       await getTopics().then(r => {
         res.json(r)

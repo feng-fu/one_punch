@@ -8,7 +8,6 @@ const { addUser,getUsers, findSpecialUser, modifiedUser, removeSingleUser } = re
 /* GET user listing. */
 router.route('/')
   .get((req, res, next) => {
-
     (async () => {
       await getUsers().then(r => {
         res.json(r)
@@ -20,8 +19,11 @@ router.route('/')
   })
   .post((req, res, next) => {
     (async () => {
+      // 注册
       await addUser(req).then(r => {
-        res.json(r)
+        res.json({
+          success: true
+        })
       }).catch(e => {
         // throw new Error('add error')
         next(e)
