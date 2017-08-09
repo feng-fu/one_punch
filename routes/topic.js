@@ -11,8 +11,7 @@ const permissionVerify = require('../middleware/login_state')
 
 /* GET user listing. */
 router.route('/')
-  .get(permissionVerify(), (req, res, next) => {
-    
+  .get((req, res, next) => {
     (async () => {
       await getTopics().then(r => {
         res.json(r)
@@ -21,15 +20,14 @@ router.route('/')
       })
     })()
   })
-  .post((req, res, next) => {
-
+  .post(permissionVerify(), (req, res, next) => {
     (async () => {
-      await addTopic(req).then(r => {
+      return await addTopic(req)
+    })().then(r => {
         res.json(r)
       }).catch(e => {
-        next(e.message)
+        next(e)
       })
-    })()
   })
 
 router.route('/:id')
@@ -51,7 +49,7 @@ router.route('/:id')
       })
     })()
   })
-  .delete((req, res, next) => {
+  .delete(permissionVerify(), (req, res, next) => {
     (async () => {
       await removeSingleTopic(req.params.id).then(r => {
         res.json(r)
@@ -62,14 +60,14 @@ router.route('/:id')
   })
 
 router.route('/:id/reply')
-  .post((req, res, next) => {
+  .post(permissionVerify(), (req, res, next) => {
     (async () => {
-      await addReply(req).then(r => {
+      return await addReply(req)
+    })().then(r => {
         res.json(r)
       }).catch(e => {
-        next(e.message)
+        next(e)
       })
-    })()
   })
 
 module.exports = router

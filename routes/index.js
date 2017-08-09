@@ -13,7 +13,7 @@ router.route('/login').post((req, res, next) => {
   (async () => {
     const { username } = req.body
     await login(req)
-    const token = JWT.sign({username, expireTime: new Date() + 10 * 60 * 1000}, secret)
+    const token = JWT.sign({username, expireTime: Date.now() + 10 * 60 * 1000}, secret)
     return {
       success: true,
       token

@@ -12,10 +12,11 @@ const permissionVerify = function(options) {
       if(!token || token.length < 1) throw new Error('error token')
       const obj = JWT.verify(token[1], secret)
       if(!obj || !obj.expireTime || !obj.username) throw new Error('no access')
-      if(obj.expireTime < new Date()) throw new Error('token out time.')
+      if(obj.expireTime < Date.now()) throw new Error('token out time.')
+      Object.defineProperty(req, 'username', {value: obj.username})
       next()
     } catch(e) {
-      throw new Error('token illegal...')
+      throw new Error(e.message)
     }
   }
 }
